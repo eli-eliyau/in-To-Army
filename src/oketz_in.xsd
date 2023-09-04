@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="oketz_in.xsd" xmlns:mstns="oketz_in.xsd"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="oketz_in.xsd"
+    elementFormDefault="qualified">
+    <xsd:simpleType name="Idate">
+        <xsd:restriction base="xsd:date" />
+    </xsd:simpleType>
+    <xsd:simpleType name="IdateTime">
+        <xsd:restriction base="xsd:dateTime" />
+    </xsd:simpleType>
+    <xsd:simpleType name="IdateTimeWithNull">
+        <xsd:union>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:dateTime" />
+            </xsd:simpleType>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="" />
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:union>
+    </xsd:simpleType>
+    <xsd:simpleType name="Ibool">
+        <xsd:restriction base="xsd:boolean" />
+    </xsd:simpleType>
+    <xsd:simpleType name="Iguid">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="36" />
+            <xsd:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="IguidUser">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="36" />
+            <xsd:pattern value="([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})*" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="hebcharsonly">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100" />
+            <xsd:pattern value="([א-ת ]{0,100})" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Engcharsonly">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10" />
+            <xsd:pattern value="([A-Za-z]{0,10})" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="hebname">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50" />
+            <xsd:minLength value="0" />
+            <xsd:pattern
+                value="([א-ת ]{1,15}( |\.|-| (&apos;)|\(|\)|(&quot;) )?[א-ת ]{0,8}( |\.|-| (&apos;|\(|\)|)|(&quot;) )?[א-ת ]{0,8}( |\.|-| (&apos;)|(&quot;) |\(|\)|)?[א-ת ]{0,50})?" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="hebengname">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50" />
+            <xsd:minLength value="0" />
+            <xsd:pattern
+                value="([א-ת A-Za-z]{1,15}( |\.|-| (&apos;)|\(|\)|(&quot;) )?[א-ת A-Za-z]{0,8}( |\.|-| (&apos;|\(|\)|)|(&quot;) )?[א-ת A-Za-z]{0,8}( |\.|-| (&apos;)|(&quot;) |\(|\)|)?[א-ת A-Za-z]{0,50})?" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="engname">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="15" />
+            <xsd:minLength value="0" />
+            <xsd:pattern value="([a-zA-Z]{1,30}(\.|-)?[a-zA-Z]{0,10}(\.|-)?[a-zA-Z]{0,15})?" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="usrname">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="60" />
+            <xsd:minLength value="0" />
+            <xsd:pattern
+                value="([a-zA-Z0-9]{1,30}(\.|-|@)?[a-zA-Z0-9]{0,10}(\.|-|@)?[a-zA-Z0-9]{0,15})?" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Numberstr">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10" />
+            <xsd:pattern value="([0-9])*" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Iint">
+        <xsd:restriction base="xsd:int" />
+    </xsd:simpleType>
+    <xsd:simpleType name="Itext">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="400" />
+            <xsd:minLength value="0" />
+            <xsd:pattern value="([א-ת0-9 &quot;&apos;\?\\\.\(\)%,:\-])*" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Itexteng">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50" />
+            <xsd:minLength value="0" />
+            <xsd:pattern value="[A-Za-z0-9א-ת &quot;&apos;\?\.\(\)%,:\-]{0,50}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Itime">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="8" />
+            <xsd:minLength value="0" />
+            <xsd:pattern
+                value="(([0-1][0-9]{1}|20|21|22|23):([0-5]{1}[0-9]{1}):([0-5]{1}[0-9]{1}))?" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:element name="oketz_in_records">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="USER_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="NAME" type="hebname" />
+                            <xsd:element name="ROLE" type="hebcharsonly" />
+                            <xsd:element name="EMAIL" type="usrname" />
+                            <xsd:element name="ROUNDRESPONSIBLE" type="Ibool" minOccurs="0" />
+                            <xsd:element name="GROUP" type="Numberstr" minOccurs="0" nillable="true" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="NOTIFICATION_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="USERID" type="Iguid" minOccurs="0" />
+                            <xsd:element name="NOTIFICATION" type="hebcharsonly" />
+                            <xsd:element name="DATE" type="Itexteng" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="FOODTYPE_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="FOODTYPE" type="Itexteng" minOccurs="0" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ABILITY_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="ABILITY" type="hebcharsonly" minOccurs="0" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="KENNEL_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="KENNELNAME" type="Itext" minOccurs="0" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="CELL_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="KENNELID" type="Iguid" minOccurs="0" />
+                            <xsd:element name="CELLNAME" type="Numberstr" minOccurs="0" />
+                            <xsd:element name="CELLDESCRIPTION" type="Itext" minOccurs="0" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="DOG_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="USERID" type="IguidUser" minOccurs="0" />
+                            <xsd:element name="CELLID" type="Iguid" />
+                            <xsd:element name="FOODTYPEID" type="Iguid" />
+                            <xsd:element name="ABILITYID" type="Iguid" />
+                            <xsd:element name="NAME" type="hebname" />
+                            <xsd:element name="WALKINGNUMBER" type="Numberstr" />
+                            <xsd:element name="BIRTHDATE" type="Idate" />
+                            <xsd:element name="WEIGHT">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:decimal">
+                                        <xsd:totalDigits value="3" />
+                                        <xsd:fractionDigits value="1" />
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+                            <xsd:element name="MADNESS" type="Itext" minOccurs="0" />
+                            <xsd:element name="ENTRYRULES" type="Itext" minOccurs="0" />
+                            <xsd:element name="FOODAMOUNT" type="Itext" />
+                            <xsd:element name="STATUS" type="Engcharsonly" />
+                            <xsd:element name="FIT" type="Ibool" />
+                            <xsd:element name="REST" type="Numberstr" />
+                            <xsd:element name="NEXTFEEDING" type="Itime" />
+                            <xsd:element name="TREATMENT" type="Itext" minOccurs="0" />
+                            <xsd:element name="NEXTFEEDINGDATE" type="Idate" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ROUND_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="USERID" type="Iguid" />
+                            <xsd:element name="TIME" type="Itexteng" />
+                            <xsd:element name="DATE" type="Idate" />
+                            <xsd:element name="NUMBER" type="Numberstr" />
+                            <xsd:element name="ISDONE" type="Ibool" />
+                            <xsd:element name="ISACTIVE" type="Ibool" />
+                            <xsd:element name="REPORTTIME" type="IdateTime" minOccurs="0" />
+                            <xsd:element name="TEAM" type="Numberstr" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ROUNDNOTE_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="NOTE" type="Itext" />
+                            <xsd:element name="TEAM" type="Numberstr" />
+                            <xsd:element name="NUMBER" type="Numberstr" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="PAIR_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="DOGID" type="Iguid" />
+                            <xsd:element name="USERID" type="Iguid" />
+                            <xsd:element name="STARTDATE" type="Idate" />
+                            <xsd:element name="ENDDATE" type="Idate" />
+                            <xsd:element name="LIMITTIMEMORNING" type="Itime" />
+                            <xsd:element name="LIMITTIMEEVENING" type="Itime" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="WALKING_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="PAIRID" type="Iguid" />
+                            <xsd:element name="ISDONE" type="Ibool" />
+                            <xsd:element name="WALKINGDATE" type="IdateTime" minOccurs="0" />
+                            <xsd:element name="ISACTIVE" type="Ibool" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="FOOD_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="PAIRID" type="Iguid" />
+                            <xsd:element name="ISDONE" type="Ibool" />
+                            <xsd:element name="FEEDINGDATE" type="IdateTimeWithNull" minOccurs="0"
+                                nillable="true" />
+                            <xsd:element name="ISACTIVE" type="Ibool" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="CLEANING_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="PAIRID" type="Iguid" />
+                            <xsd:element name="ISDONE" type="Ibool" />
+                            <xsd:element name="CLEANINGDATE" type="IdateTimeWithNull" minOccurs="0"
+                                nillable="true" />
+                            <xsd:element name="ISACTIVE" type="Ibool" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="MEDICALTREATMENT_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="PAIRID" type="Iguid" />
+                            <xsd:element name="ISDONE" type="Ibool" />
+                            <xsd:element name="MEDICINERECIEVED" type="IdateTimeWithNull"
+                                minOccurs="0" nillable="true" />
+                            <xsd:element name="ISACTIVE" type="Ibool" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="MOVEDOG_TABLE" minOccurs="0" maxOccurs="2500">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ID" type="Iguid" />
+                            <xsd:element name="fromId" type="usrname" />
+                            <xsd:element name="TOID" type="Iguid" />
+                            <xsd:element name="SENDDATE" type="Idate" />
+                            <xsd:element name="DOGID" type="Iguid" />
+                            <xsd:element name="ISACTIVE" type="Ibool" />
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
