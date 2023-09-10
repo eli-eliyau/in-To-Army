@@ -34,8 +34,8 @@ export const fileXML = async () => {
 
 
   // const filePath = path.join(__dirname, '../xml', `oketz_${Date.now()}.xml`);
-  const filePath = `C:\\Users\\Administrator\\Desktop\\okezt_project\\tzoar\\in-To-Army\\dist\\xml\\oketz_${dayjs().format("DD-MM-YYYYTHH-mm")}.xml`
-  fs.writeFileSync(filePath, fileXml);
+  // const filePath = `C:\\Users\\Administrator\\Desktop\\okezt_project\\tzoar\\in-To-Army\\dist\\xml\\oketz_${dayjs().format("DD-MM-YYYYTHH-mm")}.xml`
+  // fs.writeFileSync(filePath, fileXml);
   
 
   return fileXml;
