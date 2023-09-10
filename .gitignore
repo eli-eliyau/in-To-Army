@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/src/oketz_in.xsd
 /src/xml
 # misc
 .DS_Store
