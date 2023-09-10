@@ -8,12 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fileXML = void 0;
 const connection_1 = require("../db/connection");
 const express_1 = require("express");
 const arrayTables_1 = require("../table/arrayTables");
 const format_1 = require("./format");
+const fs_1 = __importDefault(require("fs"));
+const dayjs_1 = __importDefault(require("dayjs"));
 const router = (0, express_1.Router)();
 const fileXML = () => __awaiter(void 0, void 0, void 0, function* () {
     let fileXml = `<?xml version="1.0" encoding="UTF-8" ?>\n<mstns:oketz_in_records xsi:schemaLocation="oketz_in.xsd oketz_in.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mstns="oketz_in.xsd">\n`;
@@ -32,6 +37,9 @@ const fileXML = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     fileXml += `</mstns:oketz_in_records>`;
+    // const filePath = path.join(__dirname, '../xml', `oketz_${Date.now()}.xml`);
+    const filePath = `C:\\Users\\Administrator\\Desktop\\okezt_project\\tzoar\\in-To-Army\\dist\\xml\\oketz_${(0, dayjs_1.default)().format("DD-MM-YYYYTHH-mm")}.xml`;
+    fs_1.default.writeFileSync(filePath, fileXml);
     return fileXml;
 });
 exports.fileXML = fileXML;

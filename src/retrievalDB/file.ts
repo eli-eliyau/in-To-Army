@@ -3,7 +3,10 @@ import { Router } from "express";
 import { Request, Response } from "express";
 import { columnsName, tablesName } from "../table/arrayTables";
 import { dataFormat } from "./format";
-import { log } from "console";
+import fs from "fs";
+import path from "path";
+import dayjs from "dayjs";
+
 
 const router = Router();
 
@@ -28,6 +31,13 @@ export const fileXML = async () => {
     }
   }
   fileXml += `</mstns:oketz_in_records>`;
+
+
+  // const filePath = path.join(__dirname, '../xml', `oketz_${Date.now()}.xml`);
+  const filePath = `C:\\Users\\Administrator\\Desktop\\okezt_project\\tzoar\\in-To-Army\\dist\\xml\\oketz_${dayjs().format("DD-MM-YYYYTHH-mm")}.xml`
+  fs.writeFileSync(filePath, fileXml);
+  
+
   return fileXml;
 };
 
@@ -52,3 +62,5 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 export default router;
+
+

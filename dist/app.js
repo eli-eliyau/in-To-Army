@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.base64Encoded = exports.sendToArmy = void 0;
 const axios_1 = __importDefault(require("axios"));
 const express_1 = __importDefault(require("express"));
-const file_1 = __importDefault(require("./retrievalDB/file"));
+const file_1 = require("./retrievalDB/file");
+const dayjs_1 = __importDefault(require("dayjs"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: "./.env" });
 const app = (0, express_1.default)();
@@ -47,38 +48,13 @@ const base64Encoded = (data) => {
     return Buffer.from(data, "utf8").toString("base64");
 };
 exports.base64Encoded = base64Encoded;
-// fileXML()
-//   .then((data) => {
-//     sendToArmy(
-//       base64Encoded(data),
-//       `oketz_${dayjs().format("YYYY-MM-DDTHH-mm-ss")}`
-//     );
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-// readFile("src/xml.xml", (err, data) => {
-//   if (err) {
-//     console.error(err);
-//   } else {
-//     const buffer = Buffer.from(data.toString(), "utf8");
-//     console.log("1--------------", buffer);
-//     const base64Encoded = buffer.toString("base64");
-//     console.log("2--------------", base64Encoded);
-// const encodedToUTF8 = Buffer.from(data.toString(), "utf-8");
-// const xmlToBasse64 = Buffer.from(encodedToUTF8).toString("base64");
-// const today = new Date();
-// const date = today.toLocaleDateString();
-// const time = today.toLocaleTimeString();
-//     sendToArmy(base64Encoded, `oketz_${date}_${time}`);
-//   }
-// });
-// const sending = async () => {
-//   const base64Encoded = Buffer.from(await fileXML(), "utf8").toString("base64");
-//   sendToArmy(base64Encoded, `oketz_${dayjs().format("YYYY-MM-DDTHH-mm-ss")}`);
-// };
-// sending();
-app.use("/", file_1.default);
+(0, file_1.fileXML)()
+    .then((data) => {
+    (0, exports.sendToArmy)((0, exports.base64Encoded)(data), `oketz_${(0, dayjs_1.default)().format("DD-MM-YYYYTHH-mm")}`);
+})
+    .catch((err) => {
+    console.log(err);
+});
 app.listen(500, () => {
     console.log("Server is listening on port 500.");
 });
